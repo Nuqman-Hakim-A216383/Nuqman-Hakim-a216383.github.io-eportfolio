@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Student e-Portfolio | Computer Science (Network Technology)</title>
+<meta name="description" content="Group e-Portfolio: vulnerability labs, project, reflection, skills and resources.">
+<style>
+/* ===== 1. TOKENS ===== */
+:root{
+  --bg:#f2f5f4; --surface:#ffffff; --ink:#14201c; --muted:#4f6360;
+  --line:#d6dfdc; --accent:#0f6b63; --accent-ink:#ffffff; --accent-soft:#dff0ed;
+  --nav:#0d1b19; --nav-ink:#e8f1ef;
+  --r:12px; --max:1080px;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1513; --surface:#12201d; --ink:#e6f0ee; --muted:#9bb2ae;
+    --line:#223632; --accent:#4fd1c0; --accent-ink:#06211d; --accent-soft:#17332f; --nav:#060d0c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1513; --surface:#12201d; --ink:#e6f0ee; --muted:#9bb2ae;
+  --line:#223632; --accent:#4fd1c0; --accent-ink:#06211d; --accent-soft:#17332f; --nav:#060d0c;
+}
+
+/* ===== 2. BASE ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+h1,h2,h3{line-height:1.2;margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem}
+
+/* ===== 3. NAV ===== */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--nav)}
+nav ul{list-style:none;margin:0 auto;padding:0 .5rem;max-width:var(--max);display:flex;gap:.15rem;overflow-x:auto}
+nav a{display:block;padding:1rem .95rem;color:var(--nav-ink);text-decoration:none;font-weight:500;border-bottom:3px solid transparent;white-space:nowrap}
+nav a:hover,nav a.active{border-bottom-color:var(--accent);color:#fff}
+
+/* ===== 4. HERO ===== */
+.hero{background:var(--nav);color:var(--nav-ink);padding:4.5rem 0 4rem}
+.hero h1{font-size:clamp(2rem,6vw,3.4rem);letter-spacing:-.02em;max-width:18ch}
+.hero .meta{margin:1rem 0 0;color:#a9c4bf}
+.hero .scenario{max-width:62ch;margin-top:1.5rem;font-size:1.1rem}
+
+/* ===== 5. SECTIONS ===== */
+section{padding:3.5rem 0 .5rem}
+section>.wrap>h2{font-size:1.7rem;margin-bottom:.35rem}
+.lead{color:var(--muted);margin:0 0 1.5rem;max-width:65ch}
+
+/* ===== 6. CARDS ===== */
+.grid{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1.15rem;display:flex;flex-direction:column;gap:.75rem}
+.card h3{font-size:1.1rem}
+.card p{margin:0}
+.reflect{border-left:3px solid var(--accent);padding-left:.8rem;color:var(--muted);font-size:.95rem}
+.video{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.btn{align-self:flex-start;display:inline-block;padding:.55rem 1.1rem;border-radius:8px;font-weight:600;text-decoration:none;background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:hover{filter:brightness(1.1)}
+.card.feature{grid-column:1/-1}
+@media (min-width:760px){.card.feature{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}.card.feature .col{display:flex;flex-direction:column;gap:.75rem}}
+
+/* ===== 7. TABLE, TAGS, PANELS ===== */
+.scroll-x{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;min-width:620px}
+th,td{padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--accent-soft);font-weight:600}
+tr:last-child td{border-bottom:0}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0;padding:0}
+.tags li{background:var(--accent-soft);color:var(--ink);border:1px solid var(--line);padding:.35rem .9rem;border-radius:99px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1.25rem}
+.panel p{margin:0 0 .75rem}.panel ul{margin:0 0 .75rem;padding-left:1.2rem}.panel>:last-child{margin-bottom:0}
+
+/* ===== 8. FOOTER ===== */
+footer{margin-top:4rem;background:var(--nav);color:var(--nav-ink);padding:2rem 0;text-align:center}
+footer p{margin:.2rem 0}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ===== HTML SHELL: content is injected from CONFIG below ===== -->
+<nav aria-label="Main navigation"><ul id="nav"></ul></nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <h1 id="title"></h1>
+    <p class="meta" id="meta"></p>
+    <p class="scenario" id="scenario"></p>
+  </div>
+</header>
+
+<main>
+  <section aria-labelledby="team-h"><div class="wrap">
+    <h2 id="team-h">Group members</h2>
+    <p class="lead" id="programme"></p>
+    <div class="scroll-x"><table>
+      <caption hidden>Group members, matric numbers, roles and contributions</caption>
+      <thead><tr><th scope="col">Name</th><th scope="col">Matric no.</th><th scope="col">Role</th><th scope="col">Contribution</th></tr></thead>
+      <tbody id="members"></tbody>
+    </table></div>
+  </div></section>
+
+  <section id="labs" aria-labelledby="labs-h"><div class="wrap">
+    <h2 id="labs-h">Labs</h2>
+    <p class="lead">Six vulnerability cases, each with a live code implementation, a demo video and a short reflection.</p>
+    <div class="grid" id="labGrid"></div>
+  </div></section>
+
+  <section id="projects" aria-labelledby="projects-h"><div class="wrap">
+    <h2 id="projects-h">Projects</h2>
+    <p class="lead">The group's main project.</p>
+    <div class="grid" id="projectGrid"></div>
+  </div></section>
+
+  <section id="reflection" aria-labelledby="reflection-h"><div class="wrap">
+    <h2 id="reflection-h">Reflection and learning journey</h2>
+    <div class="panel"><p id="reflectionText"></p></div>
+  </div></section>
+
+  <section id="skills" aria-labelledby="skills-h"><div class="wrap">
+    <h2 id="skills-h">Skills and tech stack</h2>
+    <ul class="tags" id="skillTags"></ul>
+  </div></section>
+
+  <section id="resources" aria-labelledby="resources-h"><div class="wrap">
+    <h2 id="resources-h">Resources</h2>
+    <div class="panel" id="resourcePanel"></div>
+  </div></section>
+</main>
+
+<footer><div class="wrap" id="footer"></div></footer>
+
+<script>
+/* ===== 1. CONFIG: edit only this block ===== */
+const CONFIG = {
+  title: "Student e-Portfolio",
+  programme: "Computer Science (Network Technology)",
+  instructor: "Dr. Nur Hanis Sabrina binti Suhaimi",
+  scenario: "[WRITE YOUR INTRO]",
+  year: 2026,
+  owner: { name: "Muhammad Nuqman Hakim bin Mohd Aini", matric: "A216383" }, // footer
+
+  members: [
+    { name: "Siti Nur Adlina binti Abdul Aziz",     matric: "A216479", role: "Leader",      contribution: "[Contribution]" },
+    { name: "Soman a/l Kannalan",                   matric: "A216773", role: "Members",     contribution: "[Contribution]" },
+    { name: "Muhammad Nuqman Hakim bin Mohd Aini",  matric: "A216383", role: "[Your Role]", contribution: "[Contribution]" },
+    { name: "Muhammad Diniy bin Zamani",            matric: "A216664", role: "[Your Role]", contribution: "[Contribution]" }
+  ],
+
+  // Replace VIDEO_ID with the YouTube ID (the part after v=)
+  labs: [
+    { title: "Case 1: Login Test",            desc: "Live code vulnerability implementation for the login test.",       code: "[LINK]", video: "VIDEO_ID", reflection: "[2–3 SENTENCES]" },
+    { title: "Case 2: Data 1",                desc: "Live code vulnerability implementation for the first data case.",  code: "[LINK]", video: "VIDEO_ID", reflection: "[2–3 SENTENCES]" },
+    { title: "Case 3: Data 2",                desc: "Live code vulnerability implementation for the second data case.", code: "[LINK]", video: "VIDEO_ID", reflection: "[2–3 SENTENCES]" },
+    { title: "Case 4: SQL Injection",         desc: "Live code vulnerability implementation for SQL injection.",        code: "[LINK]", video: "VIDEO_ID", reflection: "[2–3 SENTENCES]" },
+    { title: "Case 5: Placeholder 1",         desc: "Live code vulnerability implementation for case five.",            code: "[LINK]", video: "VIDEO_ID", reflection: "[2–3 SENTENCES]" },
+    { title: "Case 6: Placeholder 2",         desc: "Live code vulnerability implementation for case six.",             code: "[LINK]", video: "VIDEO_ID", reflection: "[2–3 SENTENCES]" }
+  ],
+
+  projects: [
+    { title: "[NAME]", desc: "[1–2 SENTENCES]", problem: true, video: "VIDEO_ID",
+      reflection: "[2–3 SENTENCES]", github: "https://github.com/USERNAME/REPO" }
+  ],
+
+  reflection: "[3–4 SENTENCES]",
+  skills: "SQL Injection, Python, Room, Retrofit, Firebase Firestore, ML Kit, CameraX",
+  resources: {
+    libraries: ["[LIST OF APIS/LIBRARIES USED]"],
+    ai: "AI tools were used to help build this portfolio and parts of the project. The group reviewed and understood all submitted work."
+  },
+
+  nav: [["Home","#home"],["Labs","#labs"],["Projects","#projects"],["Reflection","#reflection"],["Skills","#skills"],["Resources","#resources"]]
+};
+
+/* ===== 2. HELPERS ===== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const href = u => /^https?:\/\//.test(u) ? u : "#";
+const video = (id, label) => `
+  <div class="video"><iframe src="https://www.youtube.com/embed/${esc(id)}" title="${esc(label)} video"
+    loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+
+/* ===== 3. RENDERERS ===== */
+const render = {
+  head(c){
+    document.title = `${c.title} | ${c.programme}`;
+    $("title").textContent = c.title;
+    $("meta").textContent = `${c.programme}. Instructor: ${c.instructor}`;
+    $("scenario").textContent = c.scenario;
+    $("programme").textContent = `Programme: ${c.programme}`;
+    $("nav").innerHTML = c.nav.map(([t,h]) => `<li><a href="${h}">${t}</a></li>`).join("");
+  },
+  members(c){
+    $("members").innerHTML = c.members.map(m =>
+      `<tr><td>${esc(m.name)}</td><td>${esc(m.matric)}</td><td>${esc(m.role)}</td><td>${esc(m.contribution)}</td></tr>`).join("");
+  },
+  labs(c){
+    $("labGrid").innerHTML = c.labs.map(l => `
+      <article class="card">
+        <h3>${esc(l.title)}</h3>
+        <p>${esc(l.desc)}</p>
+        ${video(l.video, l.title)}
+        <p class="reflect">${esc(l.reflection)}</p>
+        <a class="btn ghost" href="${href(l.code)}" target="_blank" rel="noopener noreferrer">Open live code</a>
+      </article>`).join("");
+  },
+  projects(c){
+    $("projectGrid").innerHTML = c.projects.map(p => `
+      <article class="card feature">
+        <div class="col">
+          <h3>${esc(p.title)}</h3>
+          <p><strong>Problem statement:</strong> ${esc(p.desc)}</p>
+          <p class="reflect">${esc(p.reflection)}</p>
+          <a class="btn" href="${href(p.github)}" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+        ${video(p.video, p.title)}
+      </article>`).join("");
+  },
+  rest(c){
+    $("reflectionText").textContent = c.reflection;
+    $("skillTags").innerHTML = c.skills.split(",").map(s => `<li>${esc(s.trim())}</li>`).join("");
+    $("resourcePanel").innerHTML =
+      `<p>APIs and libraries used:</p><ul>${c.resources.libraries.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+       <p><strong>AI assistance:</strong> ${esc(c.resources.ai)}</p>`;
+    $("footer").innerHTML =
+      `<p><strong>${esc(c.owner.name)}</strong> (${esc(c.owner.matric)})</p><p>${esc(c.programme)}, ${c.year}</p>`;
+  }
+};
+
+/* ===== 4. NAV HIGHLIGHT ===== */
+function initScrollSpy(){
+  const links = [...document.querySelectorAll("nav a")];
+  const targets = links.map(a => document.querySelector(a.getAttribute("href")));
+  const update = () => {
+    const y = window.scrollY + 120;
+    let cur = 0;
+    targets.forEach((t,i) => { if (t && t.offsetTop <= y) cur = i; });
+    links.forEach((a,i) => a.classList.toggle("active", i === cur));
+  };
+  window.addEventListener("scroll", update, { passive:true });
+  update();
+}
+
+/* ===== 5. INIT ===== */
+Object.values(render).forEach(fn => fn(CONFIG));
+initScrollSpy();
+</script>
+</body>
+</html>
